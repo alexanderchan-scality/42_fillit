@@ -6,7 +6,7 @@
 /*   By: achan <achan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 20:47:00 by achan             #+#    #+#             */
-/*   Updated: 2016/12/09 23:39:09 by achan            ###   ########.fr       */
+/*   Updated: 2016/12/10 02:38:28 by achan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,17 @@ static int		reducible(t_sqr *sqr)
 	return (ind + 1);
 }
 
-static t_sqr	*sqr_check(t_sqr *sqr, t_sqr *ret)
+static t_sqr	*sqr_check(t_sqr *sqr, t_sqr *ret, int p_cnt)
 {
 	int size;
 
 	size = reducible(sqr);
-	if (size < ret->size)
+	if (!ret->size || size < ret->size)
 	{
 		ft_memcpy(ret->grid, sqr->grid, (sqr->size * sqr->size));
 		ret->size = size;
+		if (err_check(ret, sqr->size) != ret->size && perf_sqr(p_cnt * 4))
+			return (NULL);
 		return (ret);
 	}
 	return (NULL);
@@ -108,7 +110,7 @@ t_sqr			*fillit_algo(t_sqr *sqr, t_sqr *ret, t_tetris *p, int p_cnt)
 	t_sqr	*tmp;
 
 	if (!*p)
-		return (sqr_check(sqr, ret));
+		return (sqr_check(sqr, ret, p_cnt));
 	pos = 0;
 	while (pos < (sqr->size * sqr->size))
 	{

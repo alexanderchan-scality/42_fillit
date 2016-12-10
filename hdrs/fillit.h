@@ -6,7 +6,7 @@
 /*   By: achan <achan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 23:19:25 by achan             #+#    #+#             */
-/*   Updated: 2016/12/09 23:27:29 by achan            ###   ########.fr       */
+/*   Updated: 2016/12/10 02:37:11 by achan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,11 @@ extern char const		*g_err_msg[3];
 
 void					fillit(char *file);
 void					fillit_solve(t_tetris *pieces, int p_cnt);
+
 int						min_sqrt(int n);
+int						perf_sqr(int n);
+int						err_check(t_sqr *ret, int size);
+
 void					fillit_read(t_tetris *pieces, int *p_cnt, int fd);
 void					fillit_print_t(t_tetris *pieces, int p_cnt);
 void					fillit_print_s(t_sqr *sqr, int size);

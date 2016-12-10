@@ -6,7 +6,7 @@
 /*   By: achan <achan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 07:46:53 by achan             #+#    #+#             */
-/*   Updated: 2016/12/09 23:38:51 by achan            ###   ########.fr       */
+/*   Updated: 2016/12/10 02:37:47 by achan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,43 @@ int		min_sqrt(int n)
 	return (0);
 }
 
+int		perf_sqr(int size)
+{
+	int tmp;
+
+	tmp = size;
+	if (tmp == 4 || tmp == 16 || tmp == 36 || tmp == 64 || tmp == 100)
+		return (1);
+	return (0);
+}
+
+int		err_check(t_sqr *ret, int size)
+{
+	int		r_size;
+	int		ind;
+	int		cnt;
+	int		flag;
+	char	*grid;
+
+	grid = ret->grid;
+	r_size = ret->size;
+	ind = r_size - 1;
+	flag = 1;
+	while (flag && ind >= 0)
+	{
+		cnt = 0;
+		while (flag && cnt < r_size)
+		{
+			if (grid[cnt + ind * size])
+				flag = 0;
+			++cnt;
+		}
+		if (flag)
+			--ind;
+	}
+	return (ind + 1);
+}
+
 void	fillit_solve(t_tetris *p, int p_cnt)
 {
 	t_sqr	*sqr;
@@ -37,7 +74,7 @@ void	fillit_solve(t_tetris *p, int p_cnt)
 		return ;
 	if (!(ret = gen_sqr(size)))
 		return ;
-	ret->size = size + 1;
+	ret->size = 0;
 	fillit_algo(sqr, ret, p, 0);
 	fillit_print_s(ret, size);
 	fillit_del(sqr);

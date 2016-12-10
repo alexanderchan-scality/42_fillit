@@ -6,7 +6,7 @@
 #    By: achan <achan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/30 13:03:37 by achan             #+#    #+#              #
-#    Updated: 2016/12/09 22:39:36 by achan            ###   ########.fr        #
+#    Updated: 2016/12/10 02:52:19 by achan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,16 +27,16 @@ NAME	=	fillit
 all: $(NAME)
 
 $(NAME): $(C_OBJS)
-	$(CC) $(WFLAGS) $(GFLAGS) $(IFLAGS) -L. -lft $(C_OBJS) -o $@
+	@$(CC) $(WFLAGS) $(GFLAGS) $(IFLAGS) -L. -lft $(C_OBJS) -o $@
 
 $(C_OBJS): $(C_SRCS)
-	mkdir -p $(OBJS)
-	$(CC) $(WFLAGS) $(IFLAGS) $(GFLAGS) $(CFLAGS) $(subst $(OBJS),$(SRCS),$*.c) -o $@
+	@mkdir -p $(OBJS)
+	@$(CC) $(WFLAGS) $(IFLAGS) $(GFLAGS) $(CFLAGS) $(subst $(OBJS),$(SRCS),$*.c) -o $@
 
 clean:		
-	rm -rf $(OBJS)
+	@rm -rf $(OBJS)
 
 fclean: clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean $(NAME)
