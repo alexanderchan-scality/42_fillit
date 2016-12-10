@@ -6,7 +6,7 @@
 /*   By: achan <achan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 20:47:00 by achan             #+#    #+#             */
-/*   Updated: 2016/12/09 21:13:36 by achan            ###   ########.fr       */
+/*   Updated: 2016/12/09 23:28:47 by achan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,23 +88,27 @@ static int		reducible(t_sqr *sqr)
 	return (ind + 1);
 }
 
-static t_sqr	*fillit_algo(t_sqr *sqr, t_sqr *ret, t_tetris *p, int p_cnt)
+static t_sqr	*sqr_check(t_sqr *sqr, t_sqr *ret)
+{
+	int size;
+
+	size = reducible(sqr);
+	if (size < ret->size)
+	{
+		ft_memcpy(ret->grid, sqr->grid, (sqr->size * sqr->size));
+		ret->size = size;
+		return (ret);
+	}
+	return (NULL);
+}
+
+t_sqr		*fillit_algo(t_sqr *sqr, t_sqr *ret, t_tetris *p, int p_cnt)
 {
 	int		pos;
-	int		size;
 	t_sqr	*tmp;
 
 	if (!*p)
-	{
-		size = reducible(sqr);
-		if (size < ret->size)
-		{
-			ft_memcpy(ret->grid, sqr->grid, (sqr->size * sqr->size));
-			ret->size = size;
-			return (ret);
-		}
-		return (NULL);
-	}
+		return sqr_check(sqr, ret);
 	pos = 0;
 	while (pos < (sqr->size * sqr->size))
 	{
@@ -123,20 +127,3 @@ static t_sqr	*fillit_algo(t_sqr *sqr, t_sqr *ret, t_tetris *p, int p_cnt)
 	return (NULL);
 }
 
-void			fillit_solve(t_tetris *p, int p_cnt)
-{
-	t_sqr	*sqr;
-	t_sqr	*ret;
-	int		size;
-
-	size = min_sqrt(p_cnt * 4) + 1;
-	if (!(sqr = gen_sqr(size)))
-		return ;
-	if (!(ret = gen_sqr(size)))
-		return ;
-	ret->size = size + 1;
-	fillit_algo(sqr, ret, p, 0);
-	fillit_print_s(ret, size);
-	fillit_del(sqr);
-	fillit_del(ret);
-}
