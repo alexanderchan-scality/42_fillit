@@ -6,7 +6,7 @@
 /*   By: achan <achan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 07:46:53 by achan             #+#    #+#             */
-/*   Updated: 2016/12/09 23:35:05 by achan            ###   ########.fr       */
+/*   Updated: 2016/12/09 23:38:51 by achan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,12 @@ int		min_sqrt(int n)
 	while (i < 65536)
 	{
 		if (i * i > n)
-		{
-			/*if (n == 4 || n == 16 || n == 36 || n == 64 || n == 100)*/
-				/*return (i);*/
-			/*else*/
-				return (i);
-		}
+			return (i);
 		++i;
 	}
 	return (0);
 }
+
 void	fillit_solve(t_tetris *p, int p_cnt)
 {
 	t_sqr	*sqr;

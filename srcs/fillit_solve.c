@@ -6,7 +6,7 @@
 /*   By: achan <achan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 20:47:00 by achan             #+#    #+#             */
-/*   Updated: 2016/12/09 23:28:47 by achan            ###   ########.fr       */
+/*   Updated: 2016/12/09 23:39:09 by achan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,21 +102,19 @@ static t_sqr	*sqr_check(t_sqr *sqr, t_sqr *ret)
 	return (NULL);
 }
 
-t_sqr		*fillit_algo(t_sqr *sqr, t_sqr *ret, t_tetris *p, int p_cnt)
+t_sqr			*fillit_algo(t_sqr *sqr, t_sqr *ret, t_tetris *p, int p_cnt)
 {
 	int		pos;
 	t_sqr	*tmp;
 
 	if (!*p)
-		return sqr_check(sqr, ret);
+		return (sqr_check(sqr, ret));
 	pos = 0;
 	while (pos < (sqr->size * sqr->size))
 	{
 		if (settable(sqr, (t_tetris *)g_shp[*p], pos))
 		{
 			set_unset(sqr, (t_tetris *)g_shp[*p], p_cnt, pos);
-			/*system("clear");*/
-			/*fillit_print_s(sqr, sqr->size);*/
 			tmp = fillit_algo(sqr, ret, p + 1, p_cnt + 1);
 			if (tmp && tmp->size < sqr->size)
 				return (ret);
@@ -126,4 +124,3 @@ t_sqr		*fillit_algo(t_sqr *sqr, t_sqr *ret, t_tetris *p, int p_cnt)
 	}
 	return (NULL);
 }
-
